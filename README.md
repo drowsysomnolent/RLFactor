@@ -36,19 +36,26 @@ python main.py
 
 ## Group ID Usage
 For Stock Data (Multi-Asset):
-# Multi-stock data with MultiIndex
+- Multi-stock data with MultiIndex
 ```python
-group_id = get_group_id(df)  # Uses level=1 (stock codes)
+group_id = None  # Uses groupby(level=1) in operators
 ```
 For Single-Asset High-Frequency Data:
-# Generate group_id for proper groupby operations
-# Example: group by trading sessions, hours, etc.
+- Generate group_id for proper groupby operations
+- Example: group by trading sessions, hours, etc.
 ```python
-group_id = df.index.hour  # or custom grouping logic
+int_time = df.index.get_level_values('inttime')
+def int_time_to_seconds(t):
+    t = int(t)
+    h = t // 100
+    m = t % 100
+    return h * 3600 + m * 60
+int_time_sec = int_time.map(int_time_to_seconds)
+time_diff = int_time_sec.to_series().diff().abs().fillna(0)
+group_flag = (time_diff > 600).astype(int)
+group_id = group_flag.cumsum()
+group_id.index = df.index
+
 ```
-For Simple Time Series:
-# No grouping needed
-```python
-group_id = None
-```
+
 
