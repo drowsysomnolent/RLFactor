@@ -27,3 +27,9 @@ The framework has been successfully deployed on real market data:
 - **Asset**: Steel Rebar Futures (minute-level OHLC data)
 - **Achievement**: Consistent **out-of-sample IC 0.09+** with only 10-factor alpha pool
 - **Stability**: Robust performance across different market conditions
+
+## Quick Start
+
+'''bash
+python main.py
+'''
