@@ -42,7 +42,7 @@ group_id = None  # Uses groupby(level=1) in operators
 ```
 For Single-Asset High-Frequency Data:
 - Generate group_id for proper groupby operations
-- Example: group by trading sessions, hours, etc.
+- Example: group by trading sessions, mins, etc.
 ```python
 int_time = df.index.get_level_values('inttime')
 def int_time_to_seconds(t):
