@@ -30,6 +30,25 @@ The framework has been successfully deployed on real market data:
 
 ## Quick Start
 
-'''bash
+```bash
 python main.py
-'''
+```
+
+## Group ID Usage
+For Stock Data (Multi-Asset):
+# Multi-stock data with MultiIndex
+```python
+group_id = get_group_id(df)  # Uses level=1 (stock codes)
+```
+For Single-Asset High-Frequency Data:
+# Generate group_id for proper groupby operations
+# Example: group by trading sessions, hours, etc.
+```python
+group_id = df.index.hour  # or custom grouping logic
+```
+For Simple Time Series:
+# No grouping needed
+```python
+group_id = None
+```
+
